@@ -8,6 +8,7 @@ contract Todos {
         string text;
         bool completed;
     }
+
     mapping(address => Todo[]) public users;
 
     // An array of 'Todo' structs
@@ -21,9 +22,7 @@ contract Todos {
     }
 
     // Get a specific todo by index for the sender
-    function get(
-        uint256 _index
-    ) public view returns (string memory text, bool completed) {
+    function get(uint256 _index) public view returns (string memory text, bool completed) {
         Todo storage todo = users[msg.sender][_index];
         return (todo.text, todo.completed);
     }

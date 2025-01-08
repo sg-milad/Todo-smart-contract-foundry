@@ -30,9 +30,7 @@ contract TodosTest is Test {
 
     function testCannotCreateTodoForAnotherUser() public {
         vm.startPrank(user1);
-        vm.expectRevert(
-            abi.encodeWithSelector(UnauthorizedAccount.selector, user1)
-        );
+        vm.expectRevert(abi.encodeWithSelector(UnauthorizedAccount.selector, user1));
         todos.create(user2, "Buy groceries");
         vm.stopPrank();
     }
@@ -42,7 +40,7 @@ contract TodosTest is Test {
         todos.create(user1, "Buy groceries");
 
         todos.updateText(0, "Buy fruits");
-        (string memory text, ) = todos.get(0);
+        (string memory text,) = todos.get(0);
         assertEq(text, "Buy fruits");
         vm.stopPrank();
     }
