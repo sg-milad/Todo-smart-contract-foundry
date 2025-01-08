@@ -1,2 +1,6 @@
-CounterTest:testFuzz_SetNumber(uint256) (runs: 256, μ: 30966, ~: 31277)
-CounterTest:test_Increment() (gas: 31293)
+TodosTest:testCannotAccessOtherUserTodos() (gas: 66843)
+TodosTest:testCannotCreateTodoForAnotherUser() (gas: 14296)
+TodosTest:testCreateTodo() (gas: 62502)
+TodosTest:testTodoCount() (gas: 86497)
+TodosTest:testToggleCompleted() (gas: 70011)
+TodosTest:testUpdateTodoText() (gas: 63981)
