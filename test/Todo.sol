@@ -6,8 +6,6 @@ import {console} from "forge-std/console.sol";
 import {Todos} from "../src/Todo.sol";
 import {stdError} from "forge-std/StdError.sol";
 
-error UnauthorizedAccount(address account);
-
 contract TodosTest is Test {
     Todos public todos;
 
@@ -19,8 +17,8 @@ contract TodosTest is Test {
     }
 
     function testCreateTodo() public {
-        vm.startPrank(user1); // Start acting as user1
-        todos.create(user1, "Buy groceries");
+        vm.startPrank(user1);
+        todos.create("Buy groceries");
 
         (string memory text, bool completed) = todos.get(0);
         assertEq(text, "Buy groceries");
@@ -28,26 +26,19 @@ contract TodosTest is Test {
         vm.stopPrank();
     }
 
-    function testCannotCreateTodoForAnotherUser() public {
-        vm.startPrank(user1);
-        vm.expectRevert(abi.encodeWithSelector(UnauthorizedAccount.selector, user1));
-        todos.create(user2, "Buy groceries");
-        vm.stopPrank();
-    }
-
     function testUpdateTodoText() public {
         vm.startPrank(user1);
-        todos.create(user1, "Buy groceries");
+        todos.create("Buy groceries");
 
         todos.updateText(0, "Buy fruits");
-        (string memory text,) = todos.get(0);
+        (string memory text, ) = todos.get(0);
         assertEq(text, "Buy fruits");
         vm.stopPrank();
     }
 
     function testToggleCompleted() public {
         vm.startPrank(user1);
-        todos.create(user1, "Buy groceries");
+        todos.create("Buy groceries");
 
         (, bool completedBefore) = todos.get(0);
         assertEq(completedBefore, false);
@@ -64,8 +55,8 @@ contract TodosTest is Test {
 
     function testTodoCount() public {
         vm.startPrank(user1);
-        todos.create(user1, "Task 1");
-        todos.create(user1, "Task 2");
+        todos.create("Task 1");
+        todos.create("Task 2");
 
         uint256 count = todos.getTodoCount();
         assertEq(count, 2);
@@ -74,7 +65,7 @@ contract TodosTest is Test {
 
     function testCannotAccessOtherUserTodos() public {
         vm.startPrank(user1);
-        todos.create(user1, "User1 Task");
+        todos.create("User1 Task");
         vm.stopPrank();
 
         vm.startPrank(user2);
