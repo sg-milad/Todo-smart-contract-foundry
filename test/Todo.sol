@@ -31,7 +31,7 @@ contract TodosTest is Test {
         todos.create("Buy groceries");
 
         todos.updateText(0, "Buy fruits");
-        (string memory text, ) = todos.get(0);
+        (string memory text,) = todos.get(0);
         assertEq(text, "Buy fruits");
         vm.stopPrank();
     }
