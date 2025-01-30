@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 import {Script, console} from "forge-std/Script.sol";
 import {Todos} from "../src/Todo.sol";
 
-contract CounterScript is Script {
+contract TodosScript is Script {
     Todos public todos;
 
     function setUp() public {}
