@@ -70,3 +70,23 @@ $ forge --help
 $ anvil --help
 $ cast --help
 ```
+
+## useful commands
+
+get information from a contract
+
+```shell
+$ cast call contractAddress "function(args)(return types)" args --rpc-url 127.0.0.1:8545 --private-key 0x00
+```
+
+send a transaction to contract
+
+```shell
+$ cast send contractAddress "functionName(args)" argsValue --rpc-url 127.0.0.1:8545 --private-key 0x00
+```
+
+convert 0x000 to decimal
+
+```shell
+$ cast --to-base 0x000 dec
+```
